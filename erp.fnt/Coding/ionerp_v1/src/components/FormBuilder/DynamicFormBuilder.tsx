@@ -90,6 +90,7 @@ interface DynamicFormProps {
   closeButtonClassName?: string;
   innerFormButtonModel?: () => void;
   columnLayout?: 1 | 2 | 3 | 4;
+  groupClassName?: string;
   initialValues?: Record<string, any>;
   onValidDataChange?: (data: string, setValue: (name: string, value: any) => void) => void;
   children?: React.ReactNode;
@@ -120,6 +121,7 @@ const DynamicFormBuilder = forwardRef<DynamicFormHandle, DynamicFormProps>((prop
     closeButtonClassName,
     innerFormButtonModel,
     columnLayout = 1,
+    groupClassName,
     initialValues = {},
     onValidDataChange,
     children,
@@ -362,7 +364,7 @@ const DynamicFormBuilder = forwardRef<DynamicFormHandle, DynamicFormProps>((prop
   return (
     <div className="space-y-3">
       {fields.map((group, groupIndex) => (
-        <div key={`${group.group}-${groupIndex}`} className="space-y-4">
+        <div key={`${group.group}-${groupIndex}`} className={groupClassName || "space-y-4"}>
           {group.group && (
             <h3 className="font-semibold text-lg">{group.group}</h3>
           )}

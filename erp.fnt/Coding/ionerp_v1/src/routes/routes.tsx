@@ -33,7 +33,9 @@ const renderRoutes = (
   parentPath: string = "",
 ): React.ReactNode => {
   return routes.map((route) => {
-    const fullPath = `${parentPath}/${route.href}`.replace(/\/+/g, "/");
+    const fullPath = route.href.startsWith("/")
+      ? route.href
+      : `${parentPath}/${route.href}`.replace(/\/+/g, "/");
     return (
       <Route
         key={fullPath}

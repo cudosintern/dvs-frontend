@@ -20,7 +20,7 @@ export const evaluatorEditSchema = z.object({
   bankDetails: z.string().optional(),
   college: z.string().optional(),
   program: z.array(z.string()).optional(),
-  course: z.string().optional(),
+  course: z.array(z.string()).optional(),
   centers: z.string().optional(),
   resume: z.instanceof(File).optional(),
   naValidator: z.string().optional(),
@@ -41,11 +41,16 @@ export const evaluatorEditFields: FieldGroup[] = [
         isMulti: true,
       },
       {
-        type: "select",
+        type: "multiselect",
         name: "course",
         label: "Select Course",
-        placeholder: "Select course",
+        placeholder: "Select one or more course",
         options: [],
+        isMulti: true,
+        // DynamicFormBuilder clears dependent selections when the program set
+        // changes. A course loader can be attached here once an approved
+        // program-to-course API contract is available.
+        dependsOn: "program",
       },
       {
         type: "select",
